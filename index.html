@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <title>EagTek API | Полная документация</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+
+    <link rel="stylesheet" href="api/src/s.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f2ff',
+                            100: '#e0e5ff',
+                            200: '#c7d1fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#646cff',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen">
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-72 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 fixed lg:static h-16 lg:h-auto bottom-0 lg:top-0 z-20 shadow-sm lg:shadow-none">
+            <div class="p-4 hidden lg:block">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-primary-500 flex items-center justify-center text-white floating">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold flex items-center">
+                            <span class="text-primary-600 dark:text-primary-400">EagTek</span> API
+                        </h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 flex items-center">
+                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-1"></span>
+                            <span>v1.5.4</span>
+                            <span class="mx-1">•</span>
+                            <span>Online</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 relative">
+                    <input type="text" placeholder="Поиск в документации..." class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent pl-9">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-2.5 text-gray-400">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <nav class="flex lg:block overflow-x-auto lg:overflow-x-visible px-4 lg:px-0">
+                <ul class="flex lg:flex-col space-x-4 lg:space-x-0 lg:space-y-1 py-2 lg:py-4">
+                    <li>
+                        <a href="#getting-started" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            Начало работы
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#authentication" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M21 2H3v20h18V2z"></path>
+                                <path d="M7 10h10M7 14h10M7 18h5"></path>
+                            </svg>
+                            Аутентификация
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#errors" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            Ошибки
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#rate-limiting" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Лимиты запросов
+                        </a>
+                    </li>
+                    <li class="mt-4 pt-2 border-t border-gray-200 dark:border-gray-800 hidden lg:block">
+                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-4 mb-2">Ресурсы</p>
+                    </li>
+                    <li>
+                        <a href="#users" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Пользователи
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#products" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            Продукты
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#orders" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            Заказы
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#webhooks" class="nav-link block px-4 py-2.5 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                <polyline points="4 17 10 11 4 5"></polyline>
+                                <line x1="12" y1="19" x2="20" y2="19"></line>
+                            </svg>
+                            Webhooks
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main content -->
+        <main class="flex-1 pb-20 lg:pb-0 lg:pl-72">
+            <div class="max-w-4xl mx-auto px-4 py-8">
+                <!-- Getting Started -->
+                <section id="getting-started" class="mb-16 scroll-mt-16">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold">Начало работы</h1>
+                        <a href="#" class="text-sm text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            Ссылка на раздел
+                        </a>
+                    </div>
+
+                    <div class="prose dark:prose-invert max-w-none">
+                        <p class="text-lg text-gray-600 dark:text-gray-300">Добро пожаловать в документацию API EagTek. Это руководство поможет вам начать работу с нашим API и интегрировать его в ваши приложения.</p>
+
+                        <div class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-800 p-6 rounded-xl border border-primary-100 dark:border-gray-700 mt-8 mb-10">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 pt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-600 dark:text-primary-400">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-semibold text-primary-800 dark:text-primary-200">Быстрый старт</h3>
+                                    <div class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                        <p>Для начала работы вам понадобится API ключ, который можно получить в <a href="api.aspx" class="text-primary-600 dark:text-primary-400 hover:underline">личном кабинете разработчика</a>.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-primary-500">
+                                <polyline points="4 17 10 11 4 5"></polyline>
+                                <line x1="12" y1="19" x2="20" y2="19"></line>
+                            </svg>
+                            Базовый URL
+                        </h2>
+                        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mb-6 font-mono text-sm flex items-center justify-between">
+                            <span>https:
+                            <button class="copy-btn text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 p-1 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-primary-500">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                            Пример запроса
+                        </h2>
+                        <div class="relative">
+                            <div class="absolute right-3 top-3 z-10 flex space-x-1">
+                                <button class="tab-button text-xs px-2 py-1 rounded active" data-tab="curl">cURL</button>
+                                <button class="tab-button text-xs px-2 py-1 rounded" data-tab="javascript">JavaScript</button>
+                                <button class="tab-button text-xs px-2 py-1 rounded" data-tab="python">Python</button>
+                            </div>
+                            <pre class="mt-6"><code class="language-bash" id="curl-tab">curl -X GET \
+  https:
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Accept: application/json"</code></pre>
+                            <pre class="mt-6 hidden"><code class="language-javascript" id="javascript-tab">fetch('https://api.eagtek.com/v1/users', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Accept': 'application/json'
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data));</code></pre>
+                            <pre class="mt-6 hidden"><code class="language-python" id="python-tab">import requests
+
+url = "https://api.eagtek.com/v1/users"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Accept": "application/json"
+}
+
+response = requests.get(url, headers=headers)
+print(response.json())</code></pre>
+                        </div>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-primary-500">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Пример ответа
+                        </h2>
+                        <pre><code class="language-json">{
+  "data": [
+    {
+      "id": "usr_123",
+      "name": "Иван Иванов",
+      "email": "ivan@example.com",
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2023-01-15T10:30:00Z",
+      "status": "active",
+      "role": "user"
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "page": 1,
+    "per_page": 20,
+    "total_pages": 1
+  }
+}</code></pre>
+                    </div>
+                </section>
+
+                <!-- Authentication -->
+                <section id="authentication" class="mb-16 scroll-mt-16">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold">Аутентификация</h1>
+                        <a href="#authentication" class="text-sm text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            Ссылка на раздел
+                        </a>
+                    </div>
+
+                    <div class="prose dark:prose-invert max-w-none">
+                        <p>Все запросы к API EagTek должны быть аутентифицированы. Мы используем Bearer Token аутентификацию через заголовок HTTP.</p>
+
+                        <div class="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden mt-8 mb-10">
+                            <div class="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-800 flex items-center">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path font-mono text-sm">/auth/token</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold mb-3">Получение токена доступа</h3>
+                                <p>Для получения токена доступа отправьте POST запрос с вашими учетными данными.</p>
+
+                                <h4 class="font-semibold mt-6 mb-2">Параметры запроса</h4>
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <th class="text-left py-2">Параметр</th>
+                                            <th class="text-left py-2">Тип</th>
+                                            <th class="text-left py-2">Описание</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">email</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Email пользователя <span class="param-required">*</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 font-mono">password</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Пароль пользователя <span class="param-required">*</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h4 class="font-semibold mt-6 mb-2">Пример запроса</h4>
+                                <pre><code class="language-bash">curl -X POST \
+  https:
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"yourpassword"}'</code></pre>
+
+                                <h4 class="font-semibold mt-6 mb-2">Пример ответа</h4>
+                                <pre><code class="language-json">{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "refresh_token": "def50200e5b2a3d1c3a4a5b6c7d8e9f..."
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4">Использование токена</h2>
+                        <p>После получения токена доступа, включите его в заголовок <code class="text-sm">Authorization</code> всех последующих запросов:</p>
+
+                        <pre class="mt-4"><code class="language-http">Authorization: Bearer YOUR_ACCESS_TOKEN</code></pre>
+
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 dark:border-yellow-600 p-4 mt-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500">
+                                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-yellow-800 dark:text-yellow-200">Безопасность</h3>
+                                    <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
+                                        <p>Никогда не раскрывайте ваш API ключ или токен доступа в клиентском коде или публичных репозиториях. Все запросы должны выполняться с серверной части вашего приложения.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Errors -->
+                <section id="errors" class="mb-16 scroll-mt-16">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold">Ошибки API</h1>
+                        <a href="#errors" class="text-sm text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            Ссылка на раздел
+                        </a>
+                    </div>
+
+                    <div class="prose dark:prose-invert max-w-none">
+                        <p>API EagTek использует стандартные HTTP коды статусов для индикации успешности или неудачи запроса.</p>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4">Коды ошибок</h2>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <th class="text-left py-2">Код</th>
+                                    <th class="text-left py-2">Статус</th>
+                                    <th class="text-left py-2">Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">200</td>
+                                    <td class="py-2">OK</td>
+                                    <td class="py-2">Запрос выполнен успешно</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">201</td>
+                                    <td class="py-2">Created</td>
+                                    <td class="py-2">Ресурс успешно создан</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">400</td>
+                                    <td class="py-2">Bad Request</td>
+                                    <td class="py-2">Неверные параметры запроса</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">401</td>
+                                    <td class="py-2">Unauthorized</td>
+                                    <td class="py-2">Требуется аутентификация</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">403</td>
+                                    <td class="py-2">Forbidden</td>
+                                    <td class="py-2">Нет прав доступа</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">404</td>
+                                    <td class="py-2">Not Found</td>
+                                    <td class="py-2">Ресурс не найден</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">429</td>
+                                    <td class="py-2">Too Many Requests</td>
+                                    <td class="py-2">Превышен лимит запросов</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 font-mono">500</td>
+                                    <td class="py-2">Internal Server Error</td>
+                                    <td class="py-2">Ошибка сервера</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4">Формат ошибки</h2>
+                        <p>При возникновении ошибки API возвращает JSON объект с описанием проблемы:</p>
+
+                        <pre class="mt-4"><code class="language-json">{
+  "error": {
+    "code": "invalid_request",
+    "message": "Неверные параметры запроса",
+    "details": {
+      "email": "Поле email обязательно для заполнения"
+    }
+  }
+}</code></pre>
+                    </div>
+                </section>
+
+                <!-- Rate Limiting -->
+                <section id="rate-limiting" class="mb-16 scroll-mt-16">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold">Лимиты запросов</h1>
+                        <a href="#rate-limiting" class="text-sm text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            Ссылка на раздел
+                        </a>
+                    </div>
+
+                    <div class="prose dark:prose-invert max-w-none">
+                        <p>Для обеспечения стабильной работы API мы применяем ограничения на количество запросов.</p>
+
+                        <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mt-6 mb-8">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-500">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200">Текущие лимиты</h3>
+                                    <div class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                        <p><strong>100 запросов</strong> в минуту на один API ключ</p>
+                                        <p><strong>1,000 запросов</strong> в час на один API ключ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="text-2xl font-semibold mt-10 mb-4">Заголовки лимитов</h2>
+                        <p>Каждый ответ API содержит заголовки с информацией о текущих лимитах:</p>
+
+                        <table class="w-full text-sm mt-4">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <th class="text-left py-2">Заголовок</th>
+                                    <th class="text-left py-2">Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">X-RateLimit-Limit</td>
+                                    <td class="py-2">Общее количество разрешенных запросов в текущем периоде</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 font-mono">X-RateLimit-Remaining</td>
+                                    <td class="py-2">Количество оставшихся запросов в текущем периоде</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 font-mono">X-RateLimit-Reset</td>
+                                    <td class="py-2">Время (UNIX timestamp) сброса лимита</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-600 p-4 mt-6">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-medium text-blue-800 dark:text-blue-200">Превышение лимитов</h3>
+                                    <div class="mt-2 text-sm text-blue-700 dark:text-blue-300">
+                                        <p>При превышении лимитов API возвращает код 429. Для увеличения лимитов свяжитесь с нашей службой поддержки.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users API -->
+                <section id="users" class="mb-16 scroll-mt-16">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-3xl font-bold">Пользователи</h1>
+                        <a href="#users" class="text-sm text-primary-600 dark:text-primary-400 hover:underline flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            Ссылка на раздел
+                        </a>
+                    </div>
+
+                    <div class="prose dark:prose-invert max-w-none">
+                        <p>API для работы с пользователями позволяет создавать, читать, обновлять и удалять пользователей, а также управлять их правами доступа.</p>
+
+                        <div class="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden mt-8 mb-10">
+                            <div class="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-800 flex items-center">
+                                <span class="method-badge method-get">GET</span>
+                                <span class="endpoint-path font-mono text-sm">/users</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold mb-3">Получить список пользователей</h3>
+                                <p>Возвращает список всех пользователей с пагинацией. Требует прав администратора.</p>
+
+                                <h4 class="font-semibold mt-6 mb-2">Параметры запроса</h4>
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <th class="text-left py-2">Параметр</th>
+                                            <th class="text-left py-2">Тип</th>
+                                            <th class="text-left py-2">Описание</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">page</td>
+                                            <td class="py-2">integer</td>
+                                            <td class="py-2">Номер страницы (по умолчанию 1)</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">per_page</td>
+                                            <td class="py-2">integer</td>
+                                            <td class="py-2">Количество элементов на странице (по умолчанию 20, максимум 100)</td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">status</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Фильтр по статусу (active, suspended, pending)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 font-mono">role</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Фильтр по роли (admin, user, manager)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h4 class="font-semibold mt-6 mb-2">Пример запроса</h4>
+                                <pre><code class="language-bash">curl -X GET \
+  https:
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"</code></pre>
+
+                                <h4 class="font-semibold mt-6 mb-2">Пример ответа</h4>
+                                <div class="response-tabs overflow-x-auto flex border-b border-gray-200 dark:border-gray-800">
+                                    <button class="response-tab-button px-4 py-2 text-sm font-medium active" data-tab="success">Успех</button>
+                                    <button class="response-tab-button px-4 py-2 text-sm font-medium" data-tab="error">Ошибка</button>
+                                </div>
+                                <div id="success-tab" class="response-tab-content">
+                                    <pre><code class="language-json">{
+  "data": [
+    {
+      "id": "usr_123",
+      "name": "Иван Иванов",
+      "email": "ivan@example.com",
+      "avatar": "https://api.eagtek.com/v1/avatars/usr_123",
+      "status": "active",
+      "role": "user",
+      "created_at": "2023-01-01T00:00:00Z",
+      "updated_at": "2023-01-15T10:30:00Z"
+    },
+    {
+      "id": "usr_456",
+      "name": "Петр Петров",
+      "email": "petr@example.com",
+      "avatar": null,
+      "status": "active",
+      "role": "admin",
+      "created_at": "2022-12-15T14:20:00Z",
+      "updated_at": "2023-01-10T08:15:00Z"
+    }
+  ],
+  "meta": {
+    "total": 42,
+    "page": 2,
+    "per_page": 50,
+    "total_pages": 1
+  },
+  "links": {
+    "first": "https://api.eagtek.com/v1/users?page=1",
+    "last": "https://api.eagtek.com/v1/users?page=1",
+    "prev": "https://api.eagtek.com/v1/users?page=1",
+    "next": null
+  }
+}</code></pre>
+                                </div>
+                                <div id="error-tab" class="response-tab-content hidden">
+                                    <pre><code class="language-json">{
+  "error": {
+    "code": "forbidden",
+    "message": "У вас нет прав для выполнения этого действия",
+    "details": null
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden mt-8 mb-10">
+                            <div class="bg-gray-50 dark:bg-gray-800 px-4 py-3 border-b border-gray-200 dark:border-gray-800 flex items-center">
+                                <span class="method-badge method-post">POST</span>
+                                <span class="endpoint-path font-mono text-sm">/users</span>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="text-xl font-semibold mb-3">Создать пользователя</h3>
+                                <p>Создает нового пользователя. Требует прав администратора.</p>
+
+                                <h4 class="font-semibold mt-6 mb-2">Параметры запроса</h4>
+                                <table class="w-full text-sm">
+                                    <thead>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <th class="text-left py-2">Параметр</th>
+                                            <th class="text-left py-2">Тип</th>
+                                            <th class="text-left py-2">Описание</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">name</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Полное имя пользователя <span class="param-required">*</span></td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">email</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Email адрес <span class="param-required">*</span></td>
+                                        </tr>
+                                        <tr class="border-b border-gray-200 dark:border-gray-800">
+                                            <td class="py-2 font-mono">password</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Пароль (мин. 8 символов) <span class="param-required">*</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 font-mono">role</td>
+                                            <td class="py-2">string</td>
+                                            <td class="py-2">Роль (user, admin, manager)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h4 class="font-semibold mt-6 mb-2">Пример запроса</h4>
+                                <pre><code class="language-bash">curl -X POST \
+  https:
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Новый пользователь","email":"new@example.com","password":"securepassword123","role":"user"}'</code></pre>
+
+                                <h4 class="font-semibold mt-6 mb-2">Пример ответа</h4>
+                                <pre><code class="language-json">{
+  "data": {
+    "id": "usr_789",
+    "name": "Новый пользователь",
+    "email": "new@example.com",
+    "avatar": null,
+    "status": "active",
+    "role": "user",
+    "created_at": "2023-02-20T15:45:00Z",
+    "updated_at": "2023-02-20T15:45:00Z"
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <div class="fixed bottom-4 right-4 lg:hidden z-30 flex space-x-2">
+        <button id="themeToggle" class="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center shadow-lg hover:bg-primary-700 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark:hidden">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden dark:block">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+
+        <button id="menuToggle" class="w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-700 text-white flex items-center justify-center shadow-lg hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="fixed bottom-20 right-4 lg:right-6 w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 flex items-center justify-center shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors opacity-0 invisible transform translate-y-2 transition-all duration-200 z-20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="sJ.js" m2-hash="67e2af65b92c953f494c25b21e6504a027fb2aff">
+        // ps. used only in OBF
+    </script>
+</body>
+</html>
