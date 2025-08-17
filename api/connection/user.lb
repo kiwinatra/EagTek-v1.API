@@ -1,0 +1,9 @@
+import HTMLContent;
+
+HTMLContent.show() {
+    htmlinner.showcode(
+        return(
+        "<h1> viewving for users is disabled </h1>"
+        )
+    )
+}

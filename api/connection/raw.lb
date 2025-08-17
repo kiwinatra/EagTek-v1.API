@@ -1,0 +1,18 @@
+import raw_connection from CactusLib;
+import https from ctype;
+import wss from ctype;
+import antibot from LWGrimPrivate;
+
+
+let wss = "wss://api.eaglercraft.com/eagtekWSS"
+let other = "" // same trouble
+
+if connectiontype == bot {
+    click()
+    GET_API_HANDLERS: allow
+}
+
+else {
+    show():
+    '<p>API is not aviable for viewving for users</p>'
+}

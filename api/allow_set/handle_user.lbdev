@@ -1,0 +1,31 @@
+import time as time;
+import true_lib as Disable_perm;
+import allowagents@3.1;
+from allowagents@3.1 import twitterbot();
+
+switch twitterbot() {
+case allowed:
+    break
+default:
+    
+}
+
+let ALLOWAGENTS_API_KEY = "" // Emptied cause github rules
+let allowed_others = 'true'
+
+
+?handle useragent as {
+    twitterbot (onlythen time<>50){
+        Allow: /
+        Disable_perm then while stop: true
+    }
+    User_agent {
+        Allow: true
+        Disable_perm: false
+    }
+}
+
+!allowed public function() {
+    || data connection
+    !function()
+}
